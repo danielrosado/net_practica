@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,17 +18,24 @@ namespace TiendaVirtual.Controllers
 
         public ActionResult VolcarCarrito(CarritoCompra cc)
         {
+           
             foreach (Producto producto in cc)
             {
-                Pedido pedido = new Pedido();
-                pedido.IdProducto = producto.Id;
-                //TODO cantidad
-                pedido.Usuario = User.Identity.Name;
-                pedido.Fecha = DateTime.Now;
+                if (producto.Cantidad > 0)
+                {
+                    Pedido pedido = new Pedido();
+                    pedido.IdProducto = producto.Id;
+                    // TODO cantidad
+                    pedido.Usuario = User.Identity.Name;
+                    pedido.Fecha = DateTime.Now;
 
-                db.Pedidos.Add(pedido);
+                    db.Pedidos.Add(pedido);
+                    Producto prod = db.Productos.Find(producto.Id);
+                    prod.Cantidad--;
+                }
             }
 
+            cc.Clear();
             db.SaveChanges();
 
             return RedirectToAction("Index", "Productos");
