@@ -14,6 +14,13 @@ namespace TiendaVirtual.Controllers
     {
         private TiendaVirtualContainer db = new TiendaVirtualContainer();
 
+        public ActionResult AddToCart(int id, CarritoCompra cc)
+        {
+            cc.Add(db.Productos.Find(id));
+
+            return RedirectToAction("Index");
+        }
+
         // GET: Productos
         public ActionResult Index()
         {
