@@ -32,7 +32,13 @@
             @Html.DisplayFor(modelItem => item.Nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Cantidad)
+            @if (item.Cantidad > 0)
+            {
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            } else
+            {
+                <p>Agotado</p>
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Precio)
@@ -43,8 +49,14 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-            @Html.ActionLink("Add to Cart", "AddToCart", new { id = item.Id })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            @if (item.Cantidad > 0)
+            {
+                <span> | </span> 
+                @Html.ActionLink("Add to Cart", "AddToCart", new { id = item.Id })
+            }
+           
+
         </td>
     </tr>
 }
