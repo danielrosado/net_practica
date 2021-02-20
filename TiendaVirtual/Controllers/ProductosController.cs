@@ -10,6 +10,7 @@ using TiendaVirtual.Models;
 
 namespace TiendaVirtual.Controllers
 {
+    [Authorize]
     public class ProductosController : Controller
     {
         private TiendaVirtualContainer db = new TiendaVirtualContainer();

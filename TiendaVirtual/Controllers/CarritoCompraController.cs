@@ -6,6 +6,7 @@ using TiendaVirtual.Models;
 
 namespace TiendaVirtual.Controllers
 {
+    [Authorize]
     public class CarritoCompraController : Controller
     {
         private TiendaVirtualContainer db = new TiendaVirtualContainer();
