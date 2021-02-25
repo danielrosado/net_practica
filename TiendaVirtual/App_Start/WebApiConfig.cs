@@ -19,6 +19,10 @@ namespace TiendaVirtual
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Para quitar el formato XML y dejar JSON
+            var formatters = GlobalConfiguration.Configuration.Formatters;
+            formatters.Remove(formatters.XmlFormatter);
         }
     }
 }
